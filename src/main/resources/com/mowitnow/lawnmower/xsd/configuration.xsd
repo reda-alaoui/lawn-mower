@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:min="http://localhost/mowitnow"
+	targetNamespace="http://localhost/mowitnow"
+	jaxb:version="2.0">
+	
+	<xsd:element name="lawnConfiguration">
+		<xsd:complexType>
+			<xsd:attribute name="extremeOrdinate" type="xsd:int" use="required"/>
+			<xsd:attribute name="extremeAbscissa" type="xsd:int" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="mowerDeclaration">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required"/>
+			<xsd:attribute name="abscissaDeparture" type="xsd:int" use="required"/>
+			<xsd:attribute name="ordinateDeparture" type="xsd:int" use="required"/>
+			<xsd:attribute name="orientationDeparture" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="mowersDeclaration">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="min:mowerDeclaration" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="mowerCommand">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="required"/>
+			<xsd:attribute name="commands" type="xsd:string" use="required"/>
+			<xsd:attribute name="precedency" type="xsd:int" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="mowersCommand">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="min:mowerCommand" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="mowersConfiguration">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="min:mowersDeclaration"/>
+				<xsd:element ref="min:mowersCommand"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="configuration">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="min:lawnConfiguration"/>
+				<xsd:element ref="min:mowersConfiguration"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+</xsd:schema>

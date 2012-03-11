@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://localhost/mowitnow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://localhost/mowitnow http://localhost/mowitnow/configuration.xsd">
+
+	<lawnConfiguration extremeOrdinate="5"
+		extremeAbscissa="5" />
+
+	<mowersConfiguration>
+		<mowersDeclaration>
+			<mowerDeclaration id="mower1" abscissaDeparture="1"
+				ordinateDeparture="2" orientationDeparture="N" />
+			<mowerDeclaration id="mower2" abscissaDeparture="3"
+				ordinateDeparture="3" orientationDeparture="E" />
+		</mowersDeclaration>
+		<mowersCommand>
+			<mowerCommand id="mower1" commands="GAGAGAGAA"
+				precedency="1" />
+			<mowerCommand id="mower2" commands="AADAADADDA"
+				precedency="2" />
+		</mowersCommand>
+	</mowersConfiguration>
+
+</configuration>
