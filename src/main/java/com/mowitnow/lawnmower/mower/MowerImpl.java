@@ -13,6 +13,7 @@ public class MowerImpl implements Mower {
 	private Orientation orientation;
 	private Square square;
 	private String id;
+	private static final long timeout = 500;
 
 	public MowerImpl(String id, Square square, Orientation orientation) {
 		this.id = id;
@@ -37,7 +38,7 @@ public class MowerImpl implements Mower {
 		default:
 			break;
 		}
-		callRendering();
+		square.getLawn().renderRotation(square);
 	}
 
 	public void turnLeft() {
@@ -57,7 +58,7 @@ public class MowerImpl implements Mower {
 		default:
 			break;
 		}
-		callRendering();
+		square.getLawn().renderRotation(square);
 	}
 
 	public void moveForward() {
@@ -80,15 +81,11 @@ public class MowerImpl implements Mower {
 		default:
 			return;
 		}
-
+		Square oldSquare = this.square;
 		Square targetedSquare = this.square.getLawn().getSquare(
 				newSquareAbscissa, newSquareOrdinate);
 		setSquare(targetedSquare);
-		callRendering();
-	}
-
-	private void callRendering() {
-		square.getLawn().render();
+		square.getLawn().renderMove(oldSquare, targetedSquare);
 	}
 
 	private void setSquare(Square square) {
@@ -122,6 +119,12 @@ public class MowerImpl implements Mower {
 				break;
 			default:
 				break;
+			}
+
+			try {
+				Thread.sleep(timeout);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 

@@ -21,7 +21,7 @@ public class LawnMowerTest {
 		Configuration configuration = configurationLoader
 				.loadConfiguration("test1.xml");
 
-		Controller controller = new Controller(configuration);
+		Controller controller = new Controller(configuration, false);
 		controller.run();
 
 		Mower mower1 = controller.getMowersMap().get("mower1");

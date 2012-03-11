@@ -8,6 +8,8 @@ import com.mowitnow.lawnmower.jaxb.Configuration;
 import com.mowitnow.lawnmower.jaxb.MowerCommand;
 import com.mowitnow.lawnmower.jaxb.MowerDeclaration;
 import com.mowitnow.lawnmower.lawn.Lawn;
+import com.mowitnow.lawnmower.lawn.LawnFrame;
+import com.mowitnow.lawnmower.lawn.Square;
 import com.mowitnow.lawnmower.mower.Mower;
 import com.mowitnow.lawnmower.mower.MowerImpl;
 import com.mowitnow.lawnmower.mower.Orientation;
@@ -22,19 +24,18 @@ public class Controller {
 
 	private Map<String, Mower> mowersMap;
 	private Configuration configuration;
+	private Lawn lawn;
+	private LawnFrame lawnFrame;
+	private boolean guiActivated;
 
-	public Controller(Configuration configuration) {
+	public Controller(Configuration configuration, boolean activateGui) {
 		this.mowersMap = new HashMap<String, Mower>();
 		this.configuration = configuration;
-	}
-
-	public void run() {
 
 		// Création de la pelouse
-		Lawn lawn = new Lawn(configuration.getLawnConfiguration()
+		this.lawn = new Lawn(this, configuration.getLawnConfiguration()
 				.getExtremeAbscissa(), configuration.getLawnConfiguration()
 				.getExtremeOrdinate());
-
 		// Mise en position des tondeuses
 		for (MowerDeclaration mowerDeclaration : configuration
 				.getMowersConfiguration().getMowersDeclaration()
@@ -48,11 +49,19 @@ public class Controller {
 									.getOrientationDeparture())));
 		}
 
-		lawn.render();
+		if (activateGui) {
+			this.lawnFrame = new LawnFrame(this);
+			lawnFrame.setVisible(true);
+			guiActivated = true;
+		}
+		lawn.renderAll();
+	}
 
-		Collections.sort(configuration.getMowersConfiguration()
-				.getMowersCommand().getMowerCommand(),
-				new MowerCommandSorter());
+	public void run() {
+
+		Collections
+				.sort(configuration.getMowersConfiguration().getMowersCommand()
+						.getMowerCommand(), new MowerCommandSorter());
 
 		// Lancement des tondeuses
 		for (MowerCommand mowerCommand : configuration.getMowersConfiguration()
@@ -76,4 +85,71 @@ public class Controller {
 	public void setMowersMap(Map<String, Mower> mowersMap) {
 		this.mowersMap = mowersMap;
 	}
+
+	/**
+	 * @return the lawn
+	 */
+	public Lawn getLawn() {
+		return lawn;
+	}
+
+	/**
+	 * @param lawn
+	 *            the lawn to set
+	 */
+	public void setLawn(Lawn lawn) {
+		this.lawn = lawn;
+	}
+
+	/**
+	 * @return the guiActivated
+	 */
+	public boolean isGuiActivated() {
+		return guiActivated;
+	}
+
+	/**
+	 * @return the lawnFrame
+	 */
+	public LawnFrame getLawnFrame() {
+		return lawnFrame;
+	}
+
+	public void renderRotation(Square square) {
+		lawnFrame.renderRotation(square);
+	}
+
+	public void renderMove(final Square oldSquare, final Square newSquare) {
+		// Runnable code = new Runnable() {
+		// public void run() {
+		//
+		// }
+		// };
+		//
+		// if (SwingUtilities.isEventDispatchThread()) {
+		// code.run();
+		// } else {
+		// SwingUtilities.invokeLater(code);
+		// }
+
+		lawnFrame.renderMove(oldSquare, newSquare);
+
+	}
+
+	public void renderAll() {
+		// Runnable code = new Runnable() {
+		// public void run() {
+		//
+		// }
+		// };
+		// if (SwingUtilities.isEventDispatchThread()) {
+		// code.run();
+		// } else {
+		// SwingUtilities.invokeLater(code);
+		// }
+
+		lawnFrame.renderAll();
+
+	}
+
 }
