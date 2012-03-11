@@ -1,5 +1,7 @@
 package com.mowitnow.lawnmower.mower;
 
+import com.mowitnow.lawnmower.lawn.Square;
+
 /**
  * Describes commands that a mower can execute.
  * 
@@ -14,4 +16,8 @@ public interface Mower {
 	void turnLeft();
 
 	void moveForward();
+
+	Orientation getOrientation();
+
+	Square getSquare();
 }

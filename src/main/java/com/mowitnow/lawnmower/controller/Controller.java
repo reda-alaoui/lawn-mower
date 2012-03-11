@@ -20,9 +20,15 @@ import com.mowitnow.lawnmower.mower.Orientation;
  */
 public class Controller {
 
-	public static void run(Configuration configuration) {
+	private Map<String, Mower> mowersMap;
+	private Configuration configuration;
 
-		Map<String, Mower> mowersMap = new HashMap<String, Mower>();
+	public Controller(Configuration configuration) {
+		this.mowersMap = new HashMap<String, Mower>();
+		this.configuration = configuration;
+	}
+
+	public void run() {
 
 		// Création de la pelouse
 		Lawn lawn = new Lawn(configuration.getLawnConfiguration()
@@ -35,12 +41,14 @@ public class Controller {
 				.getMowerDeclaration()) {
 			mowersMap.put(
 					mowerDeclaration.getId(),
-					new MowerImpl(lawn.getSquare(
+					new MowerImpl(mowerDeclaration.getId(), lawn.getSquare(
 							mowerDeclaration.getAbscissaDeparture(),
 							mowerDeclaration.getOrdinateDeparture()),
 							Orientation.getOrientation(mowerDeclaration
 									.getOrientationDeparture())));
 		}
+
+		lawn.render();
 
 		Collections.sort(configuration.getMowersConfiguration()
 				.getMowersCommand().getMowerCommand(),
@@ -54,4 +62,18 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * @return the mowersMap
+	 */
+	public Map<String, Mower> getMowersMap() {
+		return mowersMap;
+	}
+
+	/**
+	 * @param mowersMap
+	 *            the mowersMap to set
+	 */
+	public void setMowersMap(Map<String, Mower> mowersMap) {
+		this.mowersMap = mowersMap;
+	}
 }

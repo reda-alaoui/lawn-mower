@@ -60,4 +60,11 @@ public class Square {
 			wasMown = true;
 		}
 	}
+
+	/**
+	 * @return the mower
+	 */
+	public Mower getMower() {
+		return mower;
+	}
 }

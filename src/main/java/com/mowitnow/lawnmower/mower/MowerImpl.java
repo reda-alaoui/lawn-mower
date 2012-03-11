@@ -12,10 +12,12 @@ public class MowerImpl implements Mower {
 
 	private Orientation orientation;
 	private Square square;
+	private String id;
 
-	public MowerImpl(Square square, Orientation orientation) {
+	public MowerImpl(String id, Square square, Orientation orientation) {
+		this.id = id;
 		this.orientation = orientation;
-		this.square = square;
+		setSquare(square);
 	}
 
 	public void turnRight() {
@@ -35,7 +37,7 @@ public class MowerImpl implements Mower {
 		default:
 			break;
 		}
-		// System.out.println(orientation);
+		callRendering();
 	}
 
 	public void turnLeft() {
@@ -55,7 +57,7 @@ public class MowerImpl implements Mower {
 		default:
 			break;
 		}
-		// System.out.println(orientation);
+		callRendering();
 	}
 
 	public void moveForward() {
@@ -81,26 +83,27 @@ public class MowerImpl implements Mower {
 
 		Square targetedSquare = this.square.getLawn().getSquare(
 				newSquareAbscissa, newSquareOrdinate);
-
-		if (targetedSquare != null && targetedSquare.isFree()) {
-			this.square.setMower(null);
-			targetedSquare.setMower(this);
-			this.square = targetedSquare;
-		}
-		// System.out.println(square.getX() + " " + square.getY() + " "
-		// + orientation);
-
+		setSquare(targetedSquare);
+		callRendering();
 	}
 
-	/**
-	 * @return the square
-	 */
-	public Square getSquare() {
-		return square;
+	private void callRendering() {
+		square.getLawn().render();
+	}
+
+	private void setSquare(Square square) {
+		if (square != null && square.isFree()) {
+			if (this.square != null) {
+				this.square.setMower(null);
+			}
+			square.setMower(this);
+			this.square = square;
+		}
 	}
 
 	public void executeCommands(String orders) {
-
+		System.out.println("-------------------------------------- Launching "
+				+ id + " -----------------------------------");
 		int length = orders.length();
 
 		for (int i = 0; i < length; i++) {
@@ -122,7 +125,19 @@ public class MowerImpl implements Mower {
 			}
 		}
 
-		System.out.println(square.getX() + " " + square.getY() + " "
-				+ orientation.getStringCode());
+		System.out.println(id + " final location: " + square.getX() + " "
+				+ square.getY() + " " + orientation.getStringCode());
+	}
+
+	@Override
+	public Orientation getOrientation() {
+		return orientation;
+	}
+
+	/**
+	 * @return the square
+	 */
+	public Square getSquare() {
+		return square;
 	}
 }

@@ -30,4 +30,22 @@ public class Lawn {
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		String gridRepresentation = "";
+
+		for (int j = extremeOrdinate; j >= 0; j--) {
+			for (int i = 0; i < extremeAbscissa + 1; i++) {
+				gridRepresentation += "["
+						+ (grid[i][j].isFree() ? " " : grid[i][j].getMower()
+								.getOrientation().getStringCode()) + "]";
+			}
+			gridRepresentation += "\n";
+		}
+		return gridRepresentation;
+	}
+
+	public void render() {
+		System.out.println(this);
+	}
 }
