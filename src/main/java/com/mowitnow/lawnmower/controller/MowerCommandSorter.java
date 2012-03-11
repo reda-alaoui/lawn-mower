@@ -10,7 +10,7 @@ import com.mowitnow.lawnmower.jaxb.MowerCommand;
  * @author Reda
  * 
  */
-public class MowerCommandComparator implements Comparator<MowerCommand> {
+public class MowerCommandSorter implements Comparator<MowerCommand> {
 
 	public int compare(MowerCommand o1, MowerCommand o2) {
 		if (o1 == null || o2 == null) {

@@ -14,7 +14,7 @@ import com.mowitnow.lawnmower.parser.ConfigurationLoader;
 public class LawnMowerTest {
 
 	@Test
-	public void launchMowers() throws JAXBException {
+	public void launchTest1() throws JAXBException {
 		ConfigurationLoader configurationLoader = new ConfigurationLoader(
 				"com/mowitnow/lawnmower/xml/");
 

@@ -52,7 +52,7 @@ public class Controller {
 
 		Collections.sort(configuration.getMowersConfiguration()
 				.getMowersCommand().getMowerCommand(),
-				new MowerCommandComparator());
+				new MowerCommandSorter());
 
 		// Lancement des tondeuses
 		for (MowerCommand mowerCommand : configuration.getMowersConfiguration()
