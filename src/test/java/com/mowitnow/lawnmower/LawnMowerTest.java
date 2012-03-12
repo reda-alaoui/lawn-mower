@@ -1,5 +1,7 @@
 package com.mowitnow.lawnmower;
 
+import java.io.FileNotFoundException;
+
 import javax.xml.bind.JAXBException;
 
 import junit.framework.Assert;
@@ -14,9 +16,9 @@ import com.mowitnow.lawnmower.parser.ConfigurationLoader;
 public class LawnMowerTest {
 
 	@Test
-	public void launchTest1() throws JAXBException {
+	public void launchTest1() throws JAXBException, FileNotFoundException {
 		ConfigurationLoader configurationLoader = new ConfigurationLoader(
-				"com/mowitnow/lawnmower/xml/");
+				"E:/dev/projects/lawn-mower/src/test/resources/com/mowitnow/lawnmower/xml/");
 
 		Configuration configuration = configurationLoader
 				.loadConfiguration("test1.xml");

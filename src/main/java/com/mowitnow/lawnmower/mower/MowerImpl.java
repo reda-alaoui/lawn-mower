@@ -121,10 +121,12 @@ public class MowerImpl implements Mower {
 				break;
 			}
 
-			try {
-				Thread.sleep(timeout);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if (getSquare().getLawn().getController().isGuiActivated()) {
+				try {
+					Thread.sleep(timeout);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 

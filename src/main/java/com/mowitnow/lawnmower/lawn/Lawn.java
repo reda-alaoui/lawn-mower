@@ -85,4 +85,11 @@ public class Lawn {
 		return extremeAbscissa;
 	}
 
+	/**
+	 * @return the controller
+	 */
+	public Controller getController() {
+		return controller;
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.mowitnow.lawnmower.parser;
 
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -23,17 +25,16 @@ public class ConfigurationLoader {
 	}
 
 	public Configuration loadConfiguration(String fileName)
-			throws JAXBException {
-		URL xmlURL = getClass().getClassLoader().getResource(
-				configurationsDirectory + fileName);
-		return parse(xmlURL, Configuration.class);
+			throws JAXBException, FileNotFoundException {
+		InputStream is = new FileInputStream(configurationsDirectory + fileName);
+		return parse(is, Configuration.class);
 
 	}
 
-	private <T> T parse(URL url, Class<T> clazz) throws JAXBException {
+	private <T> T parse(InputStream is, Class<T> clazz) throws JAXBException {
 		Unmarshaller unmarshaller = JAXBContext.newInstance(clazz)
 				.createUnmarshaller();
-		return clazz.cast(unmarshaller.unmarshal(url));
+		return clazz.cast(unmarshaller.unmarshal(is));
 	}
 
 	/**
