@@ -22,12 +22,27 @@ public class LawnFrame extends JFrame {
 	private static final long serialVersionUID = 7830602841341724859L;
 	private Controller controller;
 	private JPanel gridPanel;
-	private final ImageIcon mowerIcon = new ImageIcon(getClass()
+
+	private final ImageIcon mowerNorthImage = new ImageIcon(getClass()
 			.getClassLoader().getResource(
-					"com/mowitnow/lawnmower/image/mower.jpg"));
-	private final ImageIcon grassImage = new ImageIcon(getClass()
+					"com/mowitnow/lawnmower/image/mower_north.jpg"));
+	private final ImageIcon mowerWestImage = new ImageIcon(getClass()
+			.getClassLoader().getResource(
+					"com/mowitnow/lawnmower/image/mower_west.jpg"));
+	private final ImageIcon mowerSouthImage = new ImageIcon(getClass()
+			.getClassLoader().getResource(
+					"com/mowitnow/lawnmower/image/mower_south.jpg"));
+	private final ImageIcon mowerEastImage = new ImageIcon(getClass()
+			.getClassLoader().getResource(
+					"com/mowitnow/lawnmower/image/mower_east.jpg"));
+
+	private final ImageIcon grassHighImage = new ImageIcon(getClass()
 			.getClassLoader().getResource(
 					"com/mowitnow/lawnmower/image/grass_high.jpg"));
+
+	private final ImageIcon grassLowImage = new ImageIcon(getClass()
+			.getClassLoader().getResource(
+					"com/mowitnow/lawnmower/image/grass_low.jpg"));
 
 	public LawnFrame(Controller controller) {
 		super();
@@ -91,7 +106,7 @@ public class LawnFrame extends JFrame {
 	}
 
 	public void renderRotation(Square square) {
-
+		renderAll();
 	}
 
 	public void renderMove(Square oldSquare, Square newSquare) {
@@ -103,11 +118,31 @@ public class LawnFrame extends JFrame {
 		gridPanel.removeAll();
 		for (int j = ((GridLayout) gridPanel.getLayout()).getColumns() - 1; j >= 0; j--) {
 			for (int i = 0; i < ((GridLayout) gridPanel.getLayout()).getRows(); i++) {
+				Square square = controller.getLawn().getSquare(i, j);
+				if (!square.isFree()) {
+					switch (square.getMower().getOrientation()) {
+					case NORTH:
+						gridPanel.add(new JLabel(mowerNorthImage));
+						break;
+					case SOUTH:
+						gridPanel.add(new JLabel(mowerSouthImage));
+						break;
+					case WEST:
+						gridPanel.add(new JLabel(mowerWestImage));
+						break;
+					case EAST:
+						gridPanel.add(new JLabel(mowerEastImage));
+						break;
+					default:
+						break;
+					}
 
-				if (!controller.getLawn().getSquare(i, j).isFree()) {
-					gridPanel.add(new JLabel(mowerIcon));
 				} else {
-					gridPanel.add(new JLabel(grassImage));
+					if (square.wasMown()) {
+						gridPanel.add(new JLabel(grassLowImage));
+					} else {
+						gridPanel.add(new JLabel(grassHighImage));
+					}
 				}
 				gridPanel.getComponent(n).validate();
 				gridPanel.getComponent(n).repaint();
