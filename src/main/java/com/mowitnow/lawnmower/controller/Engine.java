@@ -12,8 +12,12 @@ public class Engine {
 			ConfigurationLoader configurationLoader = new ConfigurationLoader(
 					args[0]);
 
-			new Controller(configurationLoader.loadConfiguration(args[1]),
+			Controller controller = new Controller(
+					configurationLoader.loadConfiguration(args[1]),
 					Boolean.parseBoolean(args[2]));
+			if (!controller.isGuiActivated()) {
+				controller.run();
+			}
 
 		} catch (JAXBException e) {
 			e.printStackTrace();
