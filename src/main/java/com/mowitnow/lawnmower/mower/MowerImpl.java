@@ -13,8 +13,18 @@ public class MowerImpl implements Mower {
 	private Orientation orientation;
 	private Square square;
 	private String id;
+	/**
+	 * Allows to set mowers speed.<br>
+	 * Bigger value make slower mowers.
+	 */
 	private static final long timeout = 500;
 
+	/**
+	 * 
+	 * @param id
+	 * @param square
+	 * @param orientation
+	 */
 	public MowerImpl(String id, Square square, Orientation orientation) {
 		this.id = id;
 		this.orientation = orientation;
@@ -88,6 +98,10 @@ public class MowerImpl implements Mower {
 		square.getLawn().renderMove(oldSquare, targetedSquare);
 	}
 
+	/**
+	 * 
+	 * @param square
+	 */
 	private void setSquare(Square square) {
 		if (square != null && square.isFree()) {
 			if (this.square != null) {

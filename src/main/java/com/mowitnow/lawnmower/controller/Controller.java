@@ -15,19 +15,38 @@ import com.mowitnow.lawnmower.mower.MowerImpl;
 import com.mowitnow.lawnmower.mower.Orientation;
 
 /**
- * Entry point.
+ * Control center.
  * 
  * @author Reda
  * 
  */
 public class Controller {
 
+	/**
+	 * Stores mowers. The map key describes mower's id.
+	 */
 	private Map<String, Mower> mowersMap;
+	/**
+	 * Loaded configuration JAXB object.
+	 */
 	private Configuration configuration;
 	private Lawn lawn;
+
+	/**
+	 * Lawn graphical representation.
+	 */
 	private LawnFrame lawnFrame;
+	/**
+	 * This flag provides the graphical interface activation status.
+	 */
 	private boolean guiActivated;
 
+	/**
+	 * Constructs a lawn, a list mowers then put last ones on the first one.
+	 * 
+	 * @param configuration
+	 * @param activateGui
+	 */
 	public Controller(Configuration configuration, boolean activateGui) {
 		this.mowersMap = new HashMap<String, Mower>();
 		this.configuration = configuration;
@@ -49,6 +68,7 @@ public class Controller {
 									.getOrientationDeparture())));
 		}
 
+		// Si interface graphique activée alors on crée notre fenêntre swing.
 		if (activateGui) {
 			this.lawnFrame = new LawnFrame(this);
 			lawnFrame.setVisible(true);
@@ -57,6 +77,9 @@ public class Controller {
 		lawn.renderAll();
 	}
 
+	/**
+	 * Orders mowers to follow their commands sequences.
+	 */
 	public void run() {
 
 		Collections
@@ -120,36 +143,11 @@ public class Controller {
 	}
 
 	public void renderMove(final Square oldSquare, final Square newSquare) {
-		// Runnable code = new Runnable() {
-		// public void run() {
-		//
-		// }
-		// };
-		//
-		// if (SwingUtilities.isEventDispatchThread()) {
-		// code.run();
-		// } else {
-		// SwingUtilities.invokeLater(code);
-		// }
-
 		lawnFrame.renderMove(oldSquare, newSquare);
-
 	}
 
 	public void renderAll() {
-		// Runnable code = new Runnable() {
-		// public void run() {
-		//
-		// }
-		// };
-		// if (SwingUtilities.isEventDispatchThread()) {
-		// code.run();
-		// } else {
-		// SwingUtilities.invokeLater(code);
-		// }
-
 		lawnFrame.renderAll();
-
 	}
 
 }

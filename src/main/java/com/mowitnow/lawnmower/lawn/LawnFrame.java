@@ -15,10 +15,14 @@ import javax.swing.JPanel;
 
 import com.mowitnow.lawnmower.controller.Controller;
 
+/**
+ * Lawn graphical representation.
+ * 
+ * @author Reda
+ * 
+ */
 public class LawnFrame extends JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 7830602841341724859L;
 	private Controller controller;
 	private JPanel gridPanel;
@@ -44,12 +48,19 @@ public class LawnFrame extends JFrame {
 			.getClassLoader().getResource(
 					"com/mowitnow/lawnmower/image/grass_low.jpg"));
 
+	/**
+	 * 
+	 * @param controller
+	 */
 	public LawnFrame(Controller controller) {
 		super();
 		this.controller = controller;
 		build();
 	}
 
+	/**
+	 * 
+	 */
 	private void build() {
 		setTitle("My Beautiful Lawn");
 		setSize(800, 800);
@@ -59,6 +70,10 @@ public class LawnFrame extends JFrame {
 		setContentPane(buildMainPanel());
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private JPanel buildMainPanel() {
 		JPanel mainPanel = new JPanel();
 
@@ -71,6 +86,10 @@ public class LawnFrame extends JFrame {
 		return mainPanel;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private JPanel buildGridPanel() {
 		gridPanel = new JPanel();
 
@@ -83,6 +102,10 @@ public class LawnFrame extends JFrame {
 		return gridPanel;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private JPanel buildActionPanel() {
 		JPanel actionPanel = new JPanel();
 		actionPanel.setLayout(new FlowLayout());
@@ -105,14 +128,26 @@ public class LawnFrame extends JFrame {
 		return actionPanel;
 	}
 
+	/**
+	 * 
+	 * @param square
+	 */
 	public void renderRotation(Square square) {
 		renderAll();
 	}
 
+	/**
+	 * 
+	 * @param oldSquare
+	 * @param newSquare
+	 */
 	public void renderMove(Square oldSquare, Square newSquare) {
 		renderAll();
 	}
 
+	/**
+	 * 
+	 */
 	public void renderAll() {
 		int n = 0;
 		gridPanel.removeAll();

@@ -1,7 +1,7 @@
 package com.mowitnow.lawnmower.mower;
 
 /**
- * Cardinal orientation.
+ * Mower's cardinal orientation.
  * 
  * @author Reda
  * 
@@ -22,6 +22,12 @@ public enum Orientation {
 		return stringCode;
 	}
 
+	/**
+	 * Translates a string code acronym into an {@link Orientation} value.
+	 * 
+	 * @param stringCode
+	 * @return
+	 */
 	public static Orientation getOrientation(String stringCode) {
 		for (Orientation orientation : values()) {
 			if (orientation.getStringCode().equals(stringCode)) {

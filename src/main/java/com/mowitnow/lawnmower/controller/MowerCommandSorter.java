@@ -5,7 +5,7 @@ import java.util.Comparator;
 import com.mowitnow.lawnmower.jaxb.MowerCommand;
 
 /**
- * Orders mowers commands following their precedences.
+ * Sort mowers commands following their precedences.
  * 
  * @author Reda
  * 

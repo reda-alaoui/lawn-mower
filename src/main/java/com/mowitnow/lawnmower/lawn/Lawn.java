@@ -14,6 +14,12 @@ public class Lawn {
 	private int extremeAbscissa;
 	private Controller controller;
 
+	/**
+	 * 
+	 * @param controller
+	 * @param extremeOrdinate
+	 * @param extremeAbscissa
+	 */
 	public Lawn(Controller controller, int extremeOrdinate, int extremeAbscissa) {
 		this.controller = controller;
 		this.extremeOrdinate = extremeOrdinate;
@@ -28,6 +34,12 @@ public class Lawn {
 
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Square getSquare(int x, int y) {
 		if (x <= extremeAbscissa && y <= extremeOrdinate) {
 			return grid[x][y];
@@ -50,6 +62,10 @@ public class Lawn {
 		return gridRepresentation;
 	}
 
+	/**
+	 * 
+	 * @param square
+	 */
 	public void renderRotation(Square square) {
 		System.out.println(this);
 		if (controller.isGuiActivated()) {
@@ -57,6 +73,11 @@ public class Lawn {
 		}
 	}
 
+	/**
+	 * 
+	 * @param oldSquare
+	 * @param newSquare
+	 */
 	public void renderMove(Square oldSquare, Square newSquare) {
 		System.out.println(this);
 		if (controller.isGuiActivated()) {
@@ -64,6 +85,9 @@ public class Lawn {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void renderAll() {
 		System.out.println(this);
 		if (controller.isGuiActivated()) {

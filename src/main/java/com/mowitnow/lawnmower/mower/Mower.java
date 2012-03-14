@@ -9,15 +9,37 @@ import com.mowitnow.lawnmower.lawn.Square;
  * 
  */
 public interface Mower {
+
+	/**
+	 * 
+	 * @param commands
+	 */
 	void executeCommands(String commands);
 
+	/**
+	 * 
+	 */
 	void turnRight();
 
+	/**
+	 * 
+	 */
 	void turnLeft();
 
+	/**
+	 * 
+	 */
 	void moveForward();
 
+	/**
+	 * 
+	 * @return
+	 */
 	Orientation getOrientation();
 
+	/**
+	 * 
+	 * @return
+	 */
 	Square getSquare();
 }

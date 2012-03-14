@@ -6,6 +6,12 @@ import javax.xml.bind.JAXBException;
 
 import com.mowitnow.lawnmower.parser.ConfigurationLoader;
 
+/**
+ * Entry point.
+ * 
+ * @author Reda
+ * 
+ */
 public class Engine {
 	public static void main(String[] args) {
 		try {

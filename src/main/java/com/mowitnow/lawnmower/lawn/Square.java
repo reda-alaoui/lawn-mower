@@ -15,16 +15,29 @@ public class Square {
 	private Mower mower;
 	private boolean wasMown;
 
+	/**
+	 * 
+	 * @param lawn
+	 * @param x
+	 * @param y
+	 */
 	public Square(Lawn lawn, int x, int y) {
 		this.lawn = lawn;
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * @return true if this square is mower free.
+	 */
 	public boolean isFree() {
 		return mower == null;
 	}
 
+	/**
+	 * 
+	 * @return true if this lawn square was mown.
+	 */
 	public boolean wasMown() {
 		return wasMown;
 	}
