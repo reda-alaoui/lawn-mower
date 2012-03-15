@@ -96,8 +96,8 @@ public class LawnFrame extends JFrame {
 		int extremeAbscissa = controller.getLawn().getExtremeAbscissa();
 		int extremeOrdinate = controller.getLawn().getExtremeOrdinate();
 
-		gridPanel.setLayout(new GridLayout(extremeAbscissa + 1,
-				extremeOrdinate + 1));
+		gridPanel.setLayout(new GridLayout(extremeOrdinate + 1,
+				extremeAbscissa + 1));
 		gridPanel.setBackground(Color.white);
 		return gridPanel;
 	}
@@ -151,8 +151,8 @@ public class LawnFrame extends JFrame {
 	public void renderAll() {
 		int n = 0;
 		gridPanel.removeAll();
-		for (int j = ((GridLayout) gridPanel.getLayout()).getColumns() - 1; j >= 0; j--) {
-			for (int i = 0; i < ((GridLayout) gridPanel.getLayout()).getRows(); i++) {
+		for (int j = ((GridLayout) gridPanel.getLayout()).getRows() -1; j >=0  ; j--) {
+			for (int i =0 ; i <((GridLayout) gridPanel.getLayout()).getColumns() ; i++){
 				Square square = controller.getLawn().getSquare(i, j);
 				if (!square.isFree()) {
 					switch (square.getMower().getOrientation()) {
