@@ -63,9 +63,9 @@ public class LawnFrame extends JFrame {
 	 */
 	private void build() {
 		setTitle("My Beautiful Lawn");
-		setSize(800, 800);
+		setSize(600, 600);
 		setLocationRelativeTo(null);
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(buildMainPanel());
 	}
